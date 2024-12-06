@@ -39,7 +39,7 @@ def create_app(test_config=None):
             if response.status_code == HttpStatus.OK:
                 if response.json():
                     return render_template('posts/index.html', posts=response.json())
-                return jsonify({"error": "Failed to fetch data"}), HttpStatus.NOT_FOUND
+                return jsonify({"error": "Failed to find data"}), HttpStatus.NOT_FOUND
             return jsonify({"error": f"Failed to fetch data, Status code: {response.status_code}"}), response.status_code
         except requests.exceptions.RequestException as e:
             return jsonify({'error': str(e)}), HttpStatus.SERVER_ERROR

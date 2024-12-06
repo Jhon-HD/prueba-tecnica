@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}Posts{% endblock %}</h1>
+<h1>PRUEBA TÉCNICA</h1>
 {% endblock %}
 
 {% block content %}
 <div>
-  <!-- Search Bar -->
-  <input type="text" id="search-bar" placeholder="Search posts by title..." onkeyup="filterPosts()" />
+  <form action="/data" method="get" style="text-align: center;">
+    <input type="text" name="title" id="search-bar" placeholder="Busqueda por titulo exacto..."
+      value="{{ request.args.get('title', '') }}" />
+    <button type="submit">buscar</button>
+  </form>
 </div>
 
-<!-- Results Container -->
 <div id="posts-container">
   {% for post in posts %}
-  <article class="post" data-title="{{ post['title'] }}">
+  <article class="post">
     <header>
-      <div>
-        <h1>{{ post['title'] }}</h1>
-      </div>
+      <h1>{{ post['title'] }}</h1>
     </header>
     <p class="body">{{ post['body'] }}</p>
   </article>
@@ -26,27 +26,4 @@
   {% endif %}
   {% endfor %}
 </div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-  /**
-   * Filters posts based on the search bar input.
-   */
-  function filterPosts() {
-    const query = document
-      .getElementById("search-bar")
-      .value.toLowerCase();
-    const posts = document.querySelectorAll("#posts-container .post");
-
-    posts.forEach((post) => {
-      const title = post.dataset.title.toLowerCase();
-      if (title.includes(query)) {
-        post.style.display = "block";
-      } else {
-        post.style.display = "none";
-      }
-    });
-  }
-</script>
 {% endblock %}
