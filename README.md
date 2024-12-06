@@ -12,4 +12,4 @@ Ejecución de pruebas:
 python -m unittest test_app.py
 
 Ruta de documentación:
-http://localhost:5000/apidocs/#/
+http://localhost:5000/apidocs/
