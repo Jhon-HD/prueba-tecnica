@@ -1,0 +1,46 @@
+swagger: "2.0"
+info:
+  title: "Flask API Project"
+  description: "API that retrieves and filters posts from an external service."
+  version: "1.0.0"
+host: "localhost:5000"
+basePath: "/"
+schemes:
+  - "http"
+paths:
+  /data:
+    get:
+      summary: "Retrieve posts with an optional filter by title."
+      description: "Fetch posts from an external API, with an optional query parameter to filter posts by title."
+      tags:
+        - "Posts"
+      parameters:
+        - name: "title"
+          in: "query"
+          description: "Filter posts that contain this text in their title."
+          required: false
+          type: "string"
+      responses:
+        200:
+          description: "A list of posts, optionally filtered by title."
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                userId:
+                  type: "integer"
+                  description: "ID of the user who created the post."
+                id:
+                  type: "integer"
+                  description: "ID of the post."
+                title:
+                  type: "string"
+                  description: "Title of the post."
+                body:
+                  type: "string"
+                  description: "Body content of the post."
+        400:
+          description: "Invalid request or parameters."
+        500:
+          description: "Server error or failed external API request."
